@@ -1,0 +1,38 @@
+public class EmailManager {
+
+    public void sendMail(String address, String subject, String body) {
+        //create an email message object
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new String[] {address};
+            mail.setToAddresses(toAddresses);
+        	mail.setSubject(subject);
+        	mail.setPlainTextBody(body);
+        //Pass this email to the built-in sendEmail method of the Messaging class
+        Messaging.SendEmailResult[] results = Messsaging.sendEmail(new Messaging.SingleEmailMessage[] {mail});
+        //Call a helper method to inspect the returned results
+        inspectresults(results);
+    }
+    
+    private static boolean inspectResults(Messaging.SendEmailResult[] results)
+    {
+        boolean sendResult = true;
+        
+        //snedEmail return an array of result objects 
+        //Iterate through the list of results
+        //In this class the method only sends one email TF only one result
+        
+        for(Messaging.SendEmailResult res : results) {
+            if(res.isSuccess()){
+                System.debug('Email sent successfully');
+                
+            }
+            else {
+                sendResult = false;
+                System.debug('The following error occurred: ' + res.getErrors());
+                
+            }
+        }
+        return sendResult;
+    }
+    
+}
