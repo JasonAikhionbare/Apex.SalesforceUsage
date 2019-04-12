@@ -1,0 +1,11 @@
+public class ContactSearch {
+
+    public static List<Contact> searchForContacts(String s1,String s2)
+    {
+
+       Contact[] cont=[Select Name from Contact where LastName=:s1 AND MailingPostalCode=:s2];
+
+       return cont;
+
+    }
+}
