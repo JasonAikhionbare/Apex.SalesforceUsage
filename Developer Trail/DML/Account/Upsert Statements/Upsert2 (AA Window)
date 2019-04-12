@@ -1,0 +1,17 @@
+Contact maro = new Contact(FirstName='Maro',
+                         LastName='Okoro',
+                         Email='maro.okoro@pin.com',
+                         Description='Is a Scorpio');
+insert maro;
+// 1. Upsert using an idLookup field
+// Create a second sObject variable.
+// This variable doesn’t have any ID set.
+Contact maro2 = new Contact(FirstName='Maro',
+                         LastName='Okoro',  
+                         Email='maro.okoro@pin.com',
+                         Description='Is a Scorpio.');
+// Upsert the contact by using the idLookup field for matching.
+upsert maro2 Contact.fields.Email;
+// Verify that the contact has been updated
+System.assertEquals('Is a Scorpio.',
+                   [SELECT Description FROM Contact WHERE Id=:maro.Id].Description);
