@@ -1,0 +1,39 @@
+SELECT Name,Phone FROM Account
+
+SELECT fields FROM ObjectName [WHERE Condition]
+
+SELECT Name,Phone FROM Account
+
+// Filtering query results with conditions
+SELECT Name,Phone FROM Account WHERE Name='SFDC Computing'
+
+SELECT Name,Phone FROM Account WHERE (Name='SFDC Computing' AND NumberOfEmployees>25)
+
+SELECT Name,Phone FROM Account WHERE (Name='SFDC Computing' OR (NumberOfEmployees>25 AND BillingCity='Los Angeles'))
+
+SELECT Name,Phone FROM Account ORDER BY Name
+
+SELECT Name,Phone FROM Account ORDER BY Name ASC
+
+SELECT Name,Phone FROM Account ORDER BY Name DESC
+
+
+// Limiting records
+
+Account oneAccountOnly = [SELECT Name,Phone FROM Account LIMIT 1];
+
+//Putting it all together
+SELECT Name,Phone FROM Account 
+                   WHERE (Name = 'SFDC Computing' AND NumberOfEmployees>25)
+                   ORDER BY Name
+                   LIMIT 10
+                   
+                   
+                   
+Account[] accts = [SELECT Name,Phone FROM Account 
+                   WHERE (Name='SFDC Computing' AND NumberOfEmployees>25)
+                   ORDER BY Name
+                   LIMIT 10];
+System.debug(accts.size() + ' account(s) returned.');
+// Write all account array info
+System.debug(accts);
