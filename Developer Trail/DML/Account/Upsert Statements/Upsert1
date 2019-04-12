@@ -1,0 +1,14 @@
+// Insert the Megan contact
+Contact megan = new Contact(FirstName='Megan',LastName='Flanagan',Department='Finance');       
+insert megan;
+// Megan's record has been inserted
+//   so the variable megan has now an ID
+//   which will be used to match the records by upsert
+megan.Description = 'Megan\'s record has been updated by the upsert operation.';
+// Create another contact, but don't persist it in the database
+Contact tolu = new Contact(FirstName='Tolu',LastName='Oluyede',Department='IT');
+// List to hold the new contacts to upsert
+List<Contact> contacts = new List<Contact> { megan, tolu };
+// Call upsert
+upsert contacts;
+// Result: megan is updated and tolu is created.
